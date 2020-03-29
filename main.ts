@@ -1,3 +1,25 @@
+// Steering with IR remote:
+/*
+power = 0
+stop = 1
+play = 2
+menu = 4
+forward = 5
+snooze = 6
+left = 8
+enter = 9
+right = 10
+stereo = 12
+down = 13
+up = 14
+sleep = 16
+bell = 17
+down = 18
+mute = 20
+minus = 21
+plus = 22
+*/
+
 function horizon() {
     OLED12864_I2C.hline(
         20,
