@@ -130,7 +130,7 @@ maqueen.IR_callbackUser(function ({ myparam: message }) {
         maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOff)
         maqueen.writeLED(maqueen.LED.LEDRight, maqueen.LEDswitch.turnOff)
     }
-    if (message == 10) {
+    if (message == 8) {
         OLED12864_I2C.clear()
         OLED12864_I2C.showString(
             1,
@@ -144,7 +144,7 @@ maqueen.IR_callbackUser(function ({ myparam: message }) {
         maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOn)
         maqueen.writeLED(maqueen.LED.LEDRight, maqueen.LEDswitch.turnOff)
     }
-    if (message == 8) {
+    if (message == 10) {
         OLED12864_I2C.clear()
         OLED12864_I2C.showString(
             1,
@@ -314,4 +314,32 @@ OLED12864_I2C.showString(
 let strip = neopixel.create(DigitalPin.P15, 4, NeoPixelMode.RGB);
 
 
-let powerON = 255 
+let powerON = 255
+let dist = 0
+basic.forever(function () {
+    dist = Math.floor(maqueen.sensor(PingUnit.Centimeters))
+
+
+    if ((dist != 0) && (dist < 10)) {
+        maqueen.motorStopAll()
+        maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOff)
+        maqueen.writeLED(maqueen.LED.LEDRight, maqueen.LEDswitch.turnOff)
+        OLED12864_I2C.clear()
+        OLED12864_I2C.showString(
+            1,
+            0,
+            "Obstacle!",
+            1
+        )
+        OLED12864_I2C.showString(
+            1,
+            2,
+            "D: " + dist,
+            1
+        )
+    }
+
+
+    basic.pause(100)
+
+})
