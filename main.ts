@@ -242,6 +242,48 @@ maqueen.IR_callbackUser(function ({ myparam: message }) {
             powerON = 1
         }
     }
+    if (message == 2) {
+        OLED12864_I2C.clear()
+        OLED12864_I2C.showString(
+            1,
+            0,
+            "DEMO",
+            1
+        )
+        maqueen.MotorRun(maqueen.aMotors.M1, maqueen.Dir.CW, 255)
+        maqueen.MotorRun(maqueen.aMotors.M2, maqueen.Dir.CW, 50)
+        strip.setBrightness(10)
+        strip.setPixelColor(0, NeoPixelColors.Yellow); // white
+        strip.setPixelColor(1, NeoPixelColors.Red);     // red
+        strip.setPixelColor(2, NeoPixelColors.Green);     // green
+        strip.setPixelColor(3, NeoPixelColors.Blue);    // blue
+        strip.show()
+
+        for (let index = 0; index < 30; index++) {
+
+
+            maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOn)
+            maqueen.writeLED(maqueen.LED.LEDRight, maqueen.LEDswitch.turnOn)
+            basic.pause(1000)
+            maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOff)
+            maqueen.writeLED(maqueen.LED.LEDRight, maqueen.LEDswitch.turnOff)
+            basic.pause(1000)
+            strip.rotate()
+            strip.show()
+            OLED12864_I2C.showString(
+                1,
+                2,
+                "count:" + index,
+                1
+            )
+        }
+
+        maqueen.motorStopAll()
+        maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOff)
+        maqueen.writeLED(maqueen.LED.LEDRight, maqueen.LEDswitch.turnOff)
+        strip.clear()
+        strip.show()
+    }
 })
 function left() {
     horizon()
