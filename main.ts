@@ -349,7 +349,6 @@ basic.forever(function () {
     }
 
 
-
     if (playON == 1) {
         OLED12864_I2C.clear()
         OLED12864_I2C.showString(
@@ -359,7 +358,7 @@ basic.forever(function () {
             1
         )
         maqueen.MotorRun(maqueen.aMotors.M1, maqueen.Dir.CW, 255)
-        maqueen.MotorRun(maqueen.aMotors.M2, maqueen.Dir.CW, 50)
+        maqueen.MotorRun(maqueen.aMotors.M2, maqueen.Dir.CW, 30)
         strip.setBrightness(10)
         strip.setPixelColor(0, NeoPixelColors.Yellow); // white
         strip.setPixelColor(1, NeoPixelColors.Red);     // red
@@ -367,7 +366,7 @@ basic.forever(function () {
         strip.setPixelColor(3, NeoPixelColors.Blue);    // blue
         strip.show()
 
-        for (let index = 0; index < 30; index++) {
+        for (let index = 0; index < 20; index++) {
 
 
             maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOn)
@@ -392,6 +391,9 @@ basic.forever(function () {
         strip.clear()
         strip.show()
     }
+
+
+    
     basic.pause(100)
 
 })
